@@ -24,7 +24,7 @@ export const useEmail = () => {
       color: 'warning',
     },
     {
-      title: 'private',
+      title: 'privatess',
       color: 'error',
     },
   ]

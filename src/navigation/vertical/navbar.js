@@ -1,30 +1,57 @@
 export default [
-  { heading: 'Apps & Pages' },
   {
-    title: 'Email',
+    title: 'Dashboard',
+    icon: { icon: 'tabler-mail' },
+    to: 'apps-dash',
+  },
+  {
+    title: 'Consultas',
     icon: { icon: 'tabler-mail' },
     to: 'apps-email',
   },
   {
-    title: 'Chat',
-    icon: { icon: 'tabler-message-circle' },
-    to: 'apps-chat',
+    title: 'Pacientes',
+    icon: { icon: 'tabler-mail' },
+    to: 'apps-email',
   },
   {
-    title: 'Calendar',
-    icon: { icon: 'tabler-calendar' },
-    to: 'apps-calendar',
+    title: 'Doctores',
+    icon: { icon: 'tabler-mail' },
+    to: 'apps-email',
   },
   {
-    title: 'Invoice',
+    title: 'Catálogos',
     icon: { icon: 'tabler-file-dollar' },
     children: [
-      { title: 'List', to: 'apps-invoice-list' },
-      { title: 'Preview', to: { name: 'apps-invoice-preview-id', params: { id: '5036' } } },
-      { title: 'Edit', to: { name: 'apps-invoice-edit-id', params: { id: '5036' } } },
-      { title: 'Add', to: 'apps-invoice-add' },
+      { title: 'Productos', to: 'apps-invoice-list' },
+      { title: 'Departamentos', to: 'apps-invoice-list' },
+      { title: 'Especialidades', to: 'apps-invoice-list' },
     ],
   },
+  {
+    title: 'Reportes',
+    icon: { icon: 'tabler-mail' },
+    to: 'apps-email',
+  },
+  {
+    title: 'Roles',
+    icon: { icon: 'tabler-mail' },
+    to: 'apps-email',
+  },
+  {
+    title: 'Usuarios',
+    icon: { icon: 'tabler-mail' },
+    to: 'apps-email',
+  },
+  {
+    title: 'Configuración',
+    icon: { icon: 'tabler-mail' },
+    to: 'apps-email',
+  },
+]
+
+/*
+
   {
     title: 'User',
     icon: { icon: 'tabler-users' },
@@ -125,4 +152,4 @@ export default [
     icon: { icon: 'tabler-square' },
     to: 'pages-dialog-examples',
   },
-]
+*/
