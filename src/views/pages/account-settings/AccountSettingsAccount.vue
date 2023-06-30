@@ -180,7 +180,7 @@ const resetAvatar = () => {
                   class="pt-3"
                   color="secondary"
                 >
-                  Direccion Fiscar
+                  Direccion Fiscal
                 </h3>
               </VCol>
              

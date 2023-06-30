@@ -2,12 +2,13 @@
 import { useAppAbility } from '@/plugins/casl/useAppAbility'
 import axios from '@axios'
 import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
+import cemenavImgLogin from '@images/img_fondologin.png'
 import cemenavLogo from '@images/logos/cemenav.png'
+import imageWelcome from '@images/pages/LoginPageWelcome.png'
 import authV2LoginIllustrationBorderedDark from '@images/pages/auth-v2-login-illustration-bordered-dark.png'
 import authV2LoginIllustrationBorderedLight from '@images/pages/auth-v2-login-illustration-bordered-light.png'
 import authV2LoginIllustrationDark from '@images/pages/auth-v2-login-illustration-dark.png'
 import authV2LoginIllustrationLight from '@images/pages/auth-v2-login-illustration-light.png'
-import imageWelcome from '@images/pages/LoginPageWelcome.png'
 import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import {
@@ -16,7 +17,15 @@ import {
 } from '@validators'
 import { VForm } from 'vuetify/components/VForm'
 
-const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, cemenavLogo, imageWelcome, true)
+/*
+Color azul | 3545b3
+Color naranja | ff8c44
+Color verde | 00ce96
+Color gris | bebebe
+Color morado | 6a3cbf
+Color verde cajas | 037c44
+*/
+const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, cemenavLogo, imageWelcome, cemenavImgLogin, true)
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
 const isPasswordVisible = ref(false)
 const route = useRoute()
@@ -74,7 +83,7 @@ const onSubmit = () => {
     >
       <div class="position-relative bg-background rounded-lg w-100 ma-0 me-0">
         <div class="d-flex align-center justify-center w-100 h-100">
-          <VImg :src="imageWelcome" />
+          <VImg :src="cemenavImgLogin" />
         </div>        
       </div>
     </VCol>
@@ -98,7 +107,7 @@ const onSubmit = () => {
           />
           <h3
             class="text-h3 mb-1 text-center"
-            style="color: rgb(0, 79, 193);"
+            style="color: #3545b3;"
           >
             Iniciar Sesion
           </h3>
