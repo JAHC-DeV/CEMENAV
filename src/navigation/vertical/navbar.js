@@ -1,27 +1,27 @@
 export default [
   {
     title: 'Dashboard',
-    icon: { icon: 'tabler-mail' },
+    icon: { icon: 'tabler-dashboard' },
     to: 'apps-dash',
   },
   {
     title: 'Consultas',
-    icon: { icon: 'tabler-mail' },
+    icon: { icon: 'tabler-notebook' },
     to: 'apps-email',
   },
   {
     title: 'Pacientes',
-    icon: { icon: 'tabler-mail' },
+    icon: { icon: 'tabler-users' },
     to: 'apps-email',
   },
   {
     title: 'Doctores',
-    icon: { icon: 'tabler-mail' },
+    icon: { icon: 'tabler-users' },
     to: 'apps-email',
   },
   {
     title: 'Catálogos',
-    icon: { icon: 'tabler-file-dollar' },
+    icon: { icon: 'tabler-file' },
     children: [
       { title: 'Productos', to: 'apps-invoice-list' },
       { title: 'Departamentos', to: 'apps-invoice-list' },
@@ -30,23 +30,23 @@ export default [
   },
   {
     title: 'Reportes',
-    icon: { icon: 'tabler-mail' },
+    icon: { icon: 'tabler-notes' },
     to: 'apps-email',
   },
   {
     title: 'Roles',
-    icon: { icon: 'tabler-mail' },
-    to: 'apps-email',
+    icon: { icon: 'tabler-database' },
+    to: 'apps-roles',
   },
   {
     title: 'Usuarios',
-    icon: { icon: 'tabler-mail' },
+    icon: { icon: 'tabler-users' },
     to: 'apps-email',
   },
   {
     title: 'Configuración',
-    icon: { icon: 'tabler-mail' },
-    to: 'apps-email',
+    icon: { icon: 'tabler-settings' },
+    to: { name: 'pages-account-settings-tab', params: { tab: 'account' } },
   },
 ]
 

@@ -474,6 +474,7 @@ export const getColumnChartConfig = themeColors => {
   const columnColors = {
     series1: '#826af9',
     series2: '#d2b0ff',
+    series3: '#ff00ff',
     bg: '#f8d3ff',
   }
 
@@ -488,7 +489,7 @@ export const getColumnChartConfig = themeColors => {
     },
     fill: { opacity: 1 },
     dataLabels: { enabled: false },
-    colors: [columnColors.series1, columnColors.series2],
+    colors: [columnColors.series1, columnColors.series2, columnColors.series3],
     legend: {
       position: 'top',
       horizontalAlign: 'left',
@@ -530,7 +531,7 @@ export const getColumnChartConfig = themeColors => {
     xaxis: {
       axisBorder: { show: false },
       axisTicks: { color: themeBorderColor },
-      categories: ['7/12', '8/12', '9/12', '10/12', '11/12', '12/12', '13/12', '14/12', '15/12'],
+      categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
       crosshairs: {
         stroke: { color: themeBorderColor },
       },

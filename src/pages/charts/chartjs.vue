@@ -162,7 +162,7 @@ const chartJsCustomColors = {
     <!-- 👉 Balance Horizontal Bar Chart -->
     <VCol
       cols="12"
-      md="6"
+      md="12"
     >
       <VCard>
         <VCardItem class="d-flex flex-wrap justify-space-between gap-4">

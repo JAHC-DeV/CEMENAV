@@ -1,9 +1,8 @@
 <script setup>
-import { VDataTableServer } from 'vuetify/labs/VDataTable'
 import { paginationMeta } from '@/@fake-db/utils'
 import AddNewUserDrawer from '@/views/apps/user/list/AddNewUserDrawer.vue'
 import { useUserListStore } from '@/views/apps/user/useUserListStore'
-import { avatarText } from '@core/utils/formatters'
+import { VDataTableServer } from 'vuetify/labs/VDataTable'
 
 const userListStore = useUserListStore()
 const searchQuery = ref('')
@@ -12,6 +11,16 @@ const selectedPlan = ref()
 const selectedStatus = ref()
 const totalUsers = ref(0)
 const users = ref([])
+
+const isRoleDialogVisible = ref(false)
+const roleDetail = ref()
+const isAddRoleDialogVisible = ref(false)
+
+const editPermission = value => {
+  isRoleDialogVisible.value = true
+  roleDetail.value = value
+}
+
 
 const options = ref({
   page: 1,
@@ -23,24 +32,16 @@ const options = ref({
 
 const headers = [
   {
-    title: 'User',
+    title: 'Nombre',
     key: 'user',
   },
   {
-    title: 'Role',
-    key: 'role',
+    title: 'Rol',
+    key: 'company',
   },
   {
-    title: 'Plan',
-    key: 'plan',
-  },
-  {
-    title: 'Billing',
-    key: 'billing',
-  },
-  {
-    title: 'Status',
-    key: 'status',
+    title: 'Email',
+    key: 'email',
   },
   {
     title: 'Actions',
@@ -71,24 +72,16 @@ watchEffect(fetchUsers)
 // 👉 search filters
 const roles = [
   {
-    title: 'Admin',
-    value: 'admin',
+    title: 'Super Administrador',
+    value: 'super administrador',
   },
   {
-    title: 'Author',
-    value: 'author',
+    title: 'Administrador',
+    value: 'administrador',
   },
   {
-    title: 'Editor',
+    title: 'Doctor@s',
     value: 'editor',
-  },
-  {
-    title: 'Maintainer',
-    value: 'maintainer',
-  },
-  {
-    title: 'Subscriber',
-    value: 'subscriber',
   },
 ]
 
@@ -159,19 +152,10 @@ const deleteUser = id => {
   <section>
     <VCard>
       <VCardText class="d-flex flex-wrap gap-4">
-        <AppSelect
-          :model-value="options.itemsPerPage"
-          :items="[
-            { value: 10, title: '10' },
-            { value: 25, title: '25' },
-            { value: 50, title: '50' },
-            { value: 100, title: '100' },
-            { value: -1, title: 'All' },
-          ]"
-          style="width: 5rem;"
-          @update:model-value="options.itemsPerPage = parseInt($event, 10)"
-        />
-
+        <VBtn @click="isAddRoleDialogVisible = true">
+          Add New Role
+        </VBtn>
+        <AddEditRoleDialog v-model:is-dialog-visible="isAddRoleDialogVisible" />
         <VSpacer />
 
         <div class="d-flex align-center flex-wrap gap-4">
@@ -198,7 +182,7 @@ const deleteUser = id => {
 
       <VDivider />
 
-      <!-- SECTION datatable -->
+      <!-- SECTION datatable USERS -->
       <VDataTableServer
         v-model:items-per-page="options.itemsPerPage"
         v-model:page="options.page"
@@ -211,18 +195,6 @@ const deleteUser = id => {
         <!-- User -->
         <template #item.user="{ item }">
           <div class="d-flex align-center">
-            <VAvatar
-              size="38"
-              :variant="!item.raw.avatar ? 'tonal' : undefined"
-              :color="!item.raw.avatar ? resolveUserRoleVariant(item.raw.role).color : undefined"
-              class="me-3"
-            >
-              <VImg
-                v-if="item.raw.avatar"
-                :src="item.raw.avatar"
-              />
-              <span v-else>{{ avatarText(item.raw.fullName) }}</span>
-            </VAvatar>
             <div class="d-flex flex-column">
               <h6 class="text-body-1 font-weight-medium">
                 <RouterLink
@@ -231,32 +203,21 @@ const deleteUser = id => {
                 >
                   {{ item.raw.fullName }}
                 </RouterLink>
-              </h6>
-              <span class="text-sm text-disabled">{{ item.raw.email }}</span>
+              </h6>             
             </div>
           </div>
         </template>
 
         <!-- Role -->
-        <template #item.role="{ item }">
+        <template #item.company="{ item }">
           <div class="d-flex align-center gap-4">
-            <VAvatar
-              size="30"
-              variant="tonal"
-              :color="resolveUserRoleVariant(item.raw.role).color"
-            >
-              <VIcon
-                size="20"
-                :icon="resolveUserRoleVariant(item.raw.role).icon"
-              />
-            </VAvatar>
-            <span class="text-capitalize">{{ item.raw.role }}</span>
+            <span class="text-capitalize">{{ item.raw.company }}</span>
           </div>
         </template>
 
         <!-- Plan -->
-        <template #item.plan="{ item }">
-          <span class="text-capitalize font-weight-medium">{{ item.raw.currentPlan }}</span>
+        <template #item.email="{ item }">
+          <span class="text-capitalize font-weight-medium">{{ item.raw.email }}</span>
         </template>
 
         <!-- Status -->
@@ -317,29 +278,6 @@ const deleteUser = id => {
           <IconBtn @click="deleteUser(item.raw.id)">
             <VIcon icon="tabler-trash" />
           </IconBtn>
-
-          <VBtn
-            icon
-            color="medium-emphasis"
-            density="comfortable"
-            variant="text"
-          >
-            <VIcon
-              size="24"
-              icon="tabler-dots-vertical"
-            />
-
-            <VMenu activator="parent">
-              <VList>
-                <VListItem :to="{ name: 'apps-user-view-id', params: { id: item.raw.id } }">
-                  <VListItemTitle>View</VListItemTitle>
-                </VListItem>
-                <VListItem link>
-                  <VListItemTitle>Suspend</VListItemTitle>
-                </VListItem>
-              </VList>
-            </VMenu>
-          </VBtn>
         </template>
       </VDataTableServer>
       <!-- SECTION -->
@@ -351,6 +289,10 @@ const deleteUser = id => {
       @user-data="addNewUser"
     />
   </section>
+  <AddEditRoleDialog
+    v-model:is-dialog-visible="isRoleDialogVisible"
+    v-model:role-permissions="roleDetail"
+  />
 </template>
 
 <style lang="scss">

@@ -1,28 +1,31 @@
 <script setup>
+import { getColumnChartConfig } from '@core/libs/apex-chart/apexCharConfig'
 import VueApexCharts from 'vue3-apexcharts'
 import { useTheme } from 'vuetify'
-import { getColumnChartConfig } from '@core/libs/apex-chart/apexCharConfig'
 
 const vuetifyTheme = useTheme()
 const chartConfig = computed(() => getColumnChartConfig(vuetifyTheme.current.value))
 
 const series = [
   {
-    name: 'Apple',
+    name: 'Aplicables',
     data: [
-      90,
-      120,
-      55,
-      100,
-      80,
+      40,
+      40,
+      40,
+      40,
+      40,
       125,
       175,
       70,
       88,
+      88,
+      88,
+      88,
     ],
   },
   {
-    name: 'Samsung',
+    name: 'Ingresos',
     data: [
       85,
       100,
@@ -33,6 +36,26 @@ const series = [
       30,
       110,
       62,
+      62,
+      62,
+      62,
+    ],
+  },
+  {
+    name: 'Gastos',
+    data: [
+      40,
+      50,
+      25,
+      80,
+      110,
+      50,
+      80,
+      10,
+      5,
+      5,
+      5,
+      5,
     ],
   },
 ]
@@ -41,7 +64,7 @@ const series = [
 <template>
   <VueApexCharts
     type="bar"
-    height="400"
+    height="250"
     :options="chartConfig"
     :series="series"
   />

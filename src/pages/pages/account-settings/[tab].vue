@@ -1,10 +1,7 @@
 <script setup>
-import { useRoute } from 'vue-router'
 import AccountSettingsAccount from '@/views/pages/account-settings/AccountSettingsAccount.vue'
-import AccountSettingsBillingAndPlans from '@/views/pages/account-settings/AccountSettingsBillingAndPlans.vue'
-import AccountSettingsConnections from '@/views/pages/account-settings/AccountSettingsConnections.vue'
 import AccountSettingsNotification from '@/views/pages/account-settings/AccountSettingsNotification.vue'
-import AccountSettingsSecurity from '@/views/pages/account-settings/AccountSettingsSecurity.vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const activeTab = ref(route.params.tab)
@@ -17,24 +14,9 @@ const tabs = [
     tab: 'account',
   },
   {
-    title: 'Security',
-    icon: 'tabler-lock',
-    tab: 'security',
-  },
-  {
-    title: 'Billing & Plans',
-    icon: 'tabler-file-text',
-    tab: 'billing-plans',
-  },
-  {
     title: 'Notifications',
     icon: 'tabler-bell',
     tab: 'notification',
-  },
-  {
-    title: 'Connections',
-    icon: 'tabler-link',
-    tab: 'connection',
   },
 ]
 </script>
@@ -70,24 +52,9 @@ const tabs = [
         <AccountSettingsAccount />
       </VWindowItem>
 
-      <!-- Security -->
-      <VWindowItem value="security">
-        <AccountSettingsSecurity />
-      </VWindowItem>
-
-      <!-- Billing -->
-      <VWindowItem value="billing-plans">
-        <AccountSettingsBillingAndPlans />
-      </VWindowItem>
-
       <!-- Notification -->
       <VWindowItem value="notification">
         <AccountSettingsNotification />
-      </VWindowItem>
-
-      <!-- Connections -->
-      <VWindowItem value="connection">
-        <AccountSettingsConnections />
       </VWindowItem>
     </VWindow>
   </div>
