@@ -2,7 +2,7 @@ export default [
   {
     title: 'Dashboard',
     icon: { icon: 'tabler-dashboard' },
-    to: 'apps-dash',
+    to: 'dashboards-analytics',
   },
   {
     title: 'Consultas',

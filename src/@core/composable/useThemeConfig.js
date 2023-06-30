@@ -1,8 +1,8 @@
-import { useTheme } from 'vuetify'
 import { useLayouts } from '@layouts'
 import { themeConfig } from '@themeConfig'
+import { useTheme } from 'vuetify'
 
-export const isDarkPreferred = usePreferredDark()
+export const isDarkPreferred = false
 export const useThemeConfig = () => {
   const theme = computed({
     get() {
