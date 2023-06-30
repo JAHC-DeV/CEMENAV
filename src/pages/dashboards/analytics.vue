@@ -2,6 +2,9 @@
 import ApexChartDataScience from '@/views/charts/apex-chart/ApexChartDataScience.vue'
 import { useTheme } from 'vuetify'
 
+import { useUserListStore } from '@/views/apps/user/useUserListStore'
+import { avatarText } from '@core/utils/formatters'
+import { VDataTableServer } from 'vuetify/labs/VDataTable'
 
 const vuetifyTheme = useTheme()
 const currentTheme = vuetifyTheme.current.value.colors
@@ -244,11 +247,6 @@ const statisticsVerticalD = {
   },
 }
 
-
-import { useUserListStore } from '@/views/apps/user/useUserListStore'
-import { avatarText } from '@core/utils/formatters'
-import { VDataTableServer } from 'vuetify/labs/VDataTable'
-
 const userListStore = useUserListStore()
 const searchQuery = ref('')
 const selectedRole = ref()
@@ -397,7 +395,7 @@ const deleteUser = id => {
         v-bind="statisticsVerticalA"
         :chart-options="{
           ...statisticsVerticalA.chartOptions,
-          colors: [currentTheme.primary] // Color de línea para el gráfico
+     
         }"
       />
     </VCol>
@@ -452,10 +450,7 @@ const deleteUser = id => {
         </VCardText>
       </VCard>
     </VCol>
-  </VRow>
 
-  <section>
-    <VRow>
       <VCol
         cols="12"
         sm="8"
@@ -476,8 +471,7 @@ const deleteUser = id => {
               <div class="d-flex align-center">
                 <VAvatar
                   size="34"
-                  :variant="!item.raw.avatar ? 'tonal' : undefined"
-                  :color="!item.raw.avatar ? resolveUserStatusVariantE(item.raw.role).color : undefined"
+                  :variant="!item.raw.avatar ? 'tonal' : undefined"                 
                   class="me-3"
                 >
                   <VImg
@@ -495,9 +489,7 @@ const deleteUser = id => {
                     >
                       {{ item.raw.fullName }}
                     </RouterLink>
-                  </h6>
-
-                  <span class="text-sm text-medium-emphasis">@{{ item.raw.email }}</span>
+                  </h6>                
                 </div>
               </div>
             </template>
@@ -597,8 +589,7 @@ const deleteUser = id => {
               <div class="d-flex align-center">
                 <VAvatar
                   size="34"
-                  :variant="!item.raw.avatar ? 'tonal' : undefined"
-                  :color="!item.raw.avatar ? resolveUserRoleVariant(item.raw.role).color : undefined"
+                  :variant="!item.raw.avatar ? 'tonal' : undefined"              
                   class="me-3"
                 >
                   <VImg
@@ -616,9 +607,7 @@ const deleteUser = id => {
                     >
                       {{ item.raw.fullName }}
                     </RouterLink>
-                  </h6>
-
-                  <span class="text-sm text-medium-emphasis">@{{ item.raw.email }}</span>
+                  </h6>                 
                 </div>
               </div>
             </template>
@@ -638,7 +627,7 @@ const deleteUser = id => {
         </VCard>
       </VCol>
     </VRow>
-  </section>
+
 </template>
 
 <style lang="scss">
