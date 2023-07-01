@@ -4,13 +4,16 @@ import { VIcon } from 'vuetify/components/VIcon'
 // ❗ Logo SVG must be imported with ?raw suffix
 import { defineThemeConfig } from '@core'
 import { RouteTransitions, Skins } from '@core/enums'
-import logo from '@images/logo.svg?raw'
+import logo from '@images/logo64.svg?raw'
 import { AppContentLayoutNav, ContentWidth, FooterType, NavbarType } from '@layouts/enums'
 
 export const { themeConfig, layoutConfig } = defineThemeConfig({
   app: {
-    title: 'vuexy',
-    logo: h('div', { innerHTML: logo, style: 'line-height:0; color: rgb(var(--v-global-theme-primary)); display: flex; justify-content: center; align-items: center;'  }),
+    title: 'CEMENAV',
+    logo: h('div', { innerHTML: 
+      logo, 
+    style: 'line-height:0; color: rgb(var(--v-global-theme-primary)); display: flex; justify-content: center; align-items: center;',  
+    }),
     contentWidth: ContentWidth.Boxed,
     contentLayoutNav: AppContentLayoutNav.Vertical,
     overlayNavFromBreakpoint: breakpointsVuetify.md + 16,

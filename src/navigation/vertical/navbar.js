@@ -1,27 +1,27 @@
 export default [
   {
     title: 'Dashboard',
-    icon: { icon: 'tabler-dashboard' },
+    icon: { icon: 'custom-icondahsboard' },
     to: 'dashboards-analytics',
   },
   {
     title: 'Consultas',
-    icon: { icon: 'tabler-notebook' },
+    icon: { icon: 'custom-iconconsultas' },
     to: 'apps-email',
   },
   {
     title: 'Pacientes',
-    icon: { icon: 'tabler-users' },
+    icon: { icon: 'custom-iconpacientes' },
     to: 'apps-email',
   },
   {
     title: 'Doctores',
-    icon: { icon: 'tabler-users' },
+    icon: { icon: 'custom-icondoctores' },
     to: 'apps-email',
   },
   {
     title: 'Catálogos',
-    icon: { icon: 'tabler-file' },
+    icon: { icon: 'custom-iconcatalogos' },
     children: [
       { title: 'Productos', to: 'apps-invoice-list' },
       { title: 'Departamentos', to: 'apps-invoice-list' },
@@ -30,22 +30,22 @@ export default [
   },
   {
     title: 'Reportes',
-    icon: { icon: 'tabler-notes' },
+    icon: { icon: 'custom-iconreportes' },
     to: 'apps-email',
   },
   {
     title: 'Roles',
-    icon: { icon: 'tabler-database' },
+    icon: { icon: 'custom-iconroles' },
     to: 'apps-roles',
   },
   {
     title: 'Usuarios',
-    icon: { icon: 'tabler-users' },
+    icon: { icon: 'custom-iconusuarios' },
     to: 'apps-email',
   },
   {
     title: 'Configuración',
-    icon: { icon: 'tabler-settings' },
+    icon: { icon: 'custom-iconconfiguracion' },
     to: { name: 'pages-account-settings-tab', params: { tab: 'account' } },
   },
 ]

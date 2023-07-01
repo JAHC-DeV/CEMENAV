@@ -9,11 +9,11 @@ const theme = {
     light: {
       dark: false,
       colors: {
-        'primary': localStorage.getItem(`${themeConfig.app.title}-lightThemePrimaryColor`) || staticPrimaryColor,
+        'primary': '#6a3cbf',
         'on-primary': '#fff',
-        'secondary': '#A8AAAE',
+        'secondary': '#ff8c44',
         'on-secondary': '#fff',
-        'success': '#28C76F',
+        'success': '#00ce96',
         'on-success': '#fff',
         'info': '#00CFE8',
         'on-info': '#fff',

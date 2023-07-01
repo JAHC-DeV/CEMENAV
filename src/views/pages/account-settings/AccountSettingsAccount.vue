@@ -60,7 +60,7 @@ const resetAvatar = () => {
           <form class="d-flex flex-column justify-center gap-4">
             <div class="d-flex flex-wrap gap-2">
               <VBtn
-                color="primary"
+                color="#ff8c44"
                 @click="refInputEl?.click()"
               >
                 <VIcon
@@ -81,7 +81,7 @@ const resetAvatar = () => {
 
               <VBtn
                 type="reset"
-                color="secondary"
+                color="#bebebe"
                 variant="tonal"
                 @click="resetAvatar"
               >
@@ -273,12 +273,12 @@ const resetAvatar = () => {
                 cols="12"
                 class="d-flex flex-wrap gap-4"
               >
-                <VBtn color="warning">
+                <VBtn color="#00ce96">
                   Guardar
                 </VBtn>
 
                 <VBtn
-                  color="secundary"
+                  color="#bebebe"
                   variant="tonal"
                   type="reset"
                   @click.prevent="resetForm"

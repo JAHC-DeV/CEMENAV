@@ -1,5 +1,4 @@
 <script setup>
-import { paginationMeta } from '@/@fake-db/utils'
 import AddNewUserDrawer from '@/views/apps/user/list/AddNewUserDrawer.vue'
 import { useUserListStore } from '@/views/apps/user/useUserListStore'
 import { VDataTableServer } from 'vuetify/labs/VDataTable'
@@ -152,9 +151,17 @@ const deleteUser = id => {
   <section>
     <VCard>
       <VCardText class="d-flex flex-wrap gap-4">
-        <VBtn @click="isAddRoleDialogVisible = true">
-          Add New Role
-        </VBtn>
+        <VBtn
+          density="compact"
+          icon="mdi-plus"
+          @click="isAddRoleDialogVisible = true" 
+        />
+        <VBtn
+          density="compact"
+          icon="tabler-reload"
+          color="#ff8c44"
+          style="color: white;"
+        />
         <AddEditRoleDialog v-model:is-dialog-visible="isAddRoleDialogVisible" />
         <VSpacer />
 
@@ -232,43 +239,7 @@ const deleteUser = id => {
           </VChip>
         </template>
 
-        <template #bottom>
-          <VDivider />
-
-          <div class="d-flex align-center justify-sm-space-between justify-center flex-wrap gap-3 pa-5 pt-3">
-            <p class="text-sm text-disabled mb-0">
-              {{ paginationMeta(options, totalUsers) }}
-            </p>
-
-            <VPagination
-              v-model="options.page"
-              :length="Math.ceil(totalUsers / options.itemsPerPage)"
-              :total-visible="$vuetify.display.xs ? 1 : Math.ceil(totalUsers / options.itemsPerPage)"
-            >
-              <template #prev="slotProps">
-                <VBtn
-                  variant="tonal"
-                  color="default"
-                  v-bind="slotProps"
-                  :icon="false"
-                >
-                  Previous
-                </VBtn>
-              </template>
-
-              <template #next="slotProps">
-                <VBtn
-                  variant="tonal"
-                  color="default"
-                  v-bind="slotProps"
-                  :icon="false"
-                >
-                  Next
-                </VBtn>
-              </template>
-            </VPagination>
-          </div>
-        </template>
+        <template #bottom />
 
         <!-- Actions -->
         <template #item.actions="{ item }">

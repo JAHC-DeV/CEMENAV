@@ -54,6 +54,22 @@ const selectedNotification = ref('Only when I\'m online')
         label="Notificacion de Nota Medica"
       />
     </VCardText>
-    <VDivider />
+   
+    <VCardText>
+      <VBtn
+        color="#00ce96"
+        style="margin-right: 15px;"
+      >
+        Guardar
+      </VBtn>
+      <VBtn
+        color="#bebebe"
+        variant="tonal"
+        type="reset"
+        @click.prevent="resetForm"
+      >
+        Reset
+      </VBtn>
+    </VCardText>
   </VCard>
 </template>

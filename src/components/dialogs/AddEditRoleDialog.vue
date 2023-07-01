@@ -25,55 +25,37 @@ const emit = defineEmits([
 // 👉 Permission List
 const permissions = ref([
   {
-    name: 'User Management',
+    name: 'Consultas',
     read: false,
     write: false,
     create: false,
   },
   {
-    name: 'Content Management',
+    name: 'Pacientes',
     read: false,
     write: false,
     create: false,
   },
   {
-    name: 'Disputes Management',
+    name: 'Doctores',
     read: false,
     write: false,
     create: false,
   },
   {
-    name: 'Database Management',
+    name: 'Cátalogos',
     read: false,
     write: false,
     create: false,
   },
   {
-    name: 'Financial Management',
+    name: 'Roles',
     read: false,
     write: false,
     create: false,
   },
   {
-    name: 'Reporting',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'API Control',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Repository Management',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Payroll',
+    name: 'Configuración',
     read: false,
     write: false,
     create: false,
@@ -170,44 +152,67 @@ const onReset = () => {
       <!-- 👉 Title -->
       <VCardItem class="text-center">
         <VCardTitle class="text-h3 mb-3">
-          {{ props.rolePermissions.name ? 'Edit' : 'Add New' }} Role
+          Nuevo Rol
         </VCardTitle>
-        <p class="text-base mb-0">
-          Set Role Permissions
-        </p>
       </VCardItem>
 
       <VCardText class="mt-6">
         <!-- 👉 Form -->
         <VForm ref="refPermissionForm">
           <!-- 👉 Role name -->
-          <AppTextField
-            v-model="role"
-            label="Role Name"
-            placeholder="Enter Role Name"
-          />
-
-          <h6 class="text-h4 mt-8 mb-3">
-            Role Permissions
+          <VRow>
+            <VCol sm="6">
+              <AppTextField
+                v-model="role"
+                label="Nombre"
+                placeholder=""
+              />
+            </VCol>
+            <VCol sm="6">
+              <AppTextField
+                v-model="role"
+                label="Tipo de Rol"
+                placeholder=""
+              />
+            </VCol>
+            <VCol sm="12">
+              <AppTextField
+                v-model="role"
+                label="Email"
+                placeholder=""
+              />
+            </VCol>
+          </VRow>
+          
+          <h6
+            class="text-h4 mt-8 mb-3"
+            style="color: #3545b3;"
+          >
+            Permisos
           </h6>
 
           <!-- 👉 Role Permissions -->
 
-          <VTable class="permission-table text-no-wrap">
+          <VTable
+            class="permission-table text-no-wrap"
+            fixed-header
+          >
             <!-- 👉 Admin  -->
-            <tr>
+            <tr style=" width: 100%;table-layout: fixed;">
               <td>
-                Administrator Access
+                MODULOS
               </td>
-              <td colspan="3">
-                <div class="d-flex justify-end">
-                  <VCheckbox
-                    v-model="isSelectAll"
-                    v-model:indeterminate="isIndeterminate"
-                    label="Select All"
-                  />
-                </div>
+              <td>
+                LEER
               </td>
+              <td>
+                CREAR
+              </td>
+              <td>
+                EDITAR
+              </td> <td>
+                ELIMINAR
+              </td>              
             </tr>
 
             <!-- 👉 Other permission loop -->
@@ -218,26 +223,34 @@ const onReset = () => {
               <tr>
                 <td>{{ permission.name }}</td>
                 <td>
-                  <div class="d-flex justify-end">
+                  <div class="d-flex justify-center">
                     <VCheckbox
                       v-model="permission.read"
-                      label="Read"
+                      label=""
                     />
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex justify-end">
+                  <div class="d-flex justify-center">
                     <VCheckbox
                       v-model="permission.write"
-                      label="Write"
+                      label=""
                     />
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex justify-end">
+                  <div class="d-flex justify-center">
                     <VCheckbox
                       v-model="permission.create"
-                      label="Create"
+                      label=""
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex justify-center">
+                    <VCheckbox
+                      v-model="permission.create"
+                      label=""
                     />
                   </div>
                 </td>
@@ -247,13 +260,18 @@ const onReset = () => {
 
           <!-- 👉 Actions button -->
           <div class="d-flex align-center justify-center gap-3 mt-6">
-            <VBtn @click="onSubmit">
-              Submit
+            <VBtn
+              color="#00ce96"
+              style="color: #fff;"
+              @click="onSubmit"
+            >
+              Guardar
             </VBtn>
 
             <VBtn
-              color="secondary"
+              color="#bebebe"
               variant="tonal"
+             
               @click="onReset"
             >
               Cancel

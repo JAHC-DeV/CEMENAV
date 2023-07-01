@@ -2,9 +2,6 @@
 import ApexChartDataScience from '@/views/charts/apex-chart/ApexChartDataScience.vue'
 import { useTheme } from 'vuetify'
 
-import { useUserListStore } from '@/views/apps/user/useUserListStore'
-import { avatarText } from '@core/utils/formatters'
-import { VDataTableServer } from 'vuetify/labs/VDataTable'
 
 const vuetifyTheme = useTheme()
 const currentTheme = vuetifyTheme.current.value.colors
@@ -12,7 +9,7 @@ const currentTheme = vuetifyTheme.current.value.colors
 const statisticsVerticalA = {
   title: 'Solicitudes de Citas',
   color: currentTheme.primary,
-  icon: 'tabler-credit-card',
+  icon: 'custom-iconsolicitas',
   stats: '145',  height: 97,  series: [{
     data: [
       100,
@@ -70,7 +67,7 @@ const statisticsVerticalA = {
 const statisticsVerticalB = {
   title: 'Citas en Turno',
   color: currentTheme.warning,
-  icon: 'tabler-credit-card',
+  icon: 'custom-iconcitasenturno',
   stats: '250',
   height: 97,
   series: [{
@@ -130,7 +127,7 @@ const statisticsVerticalB = {
 const statisticsVerticalC = {
   title: 'Citas Canceladas',
   color: currentTheme.success,
-  icon: 'tabler-credit-card',
+  icon: 'custom-iconcanceladas',
   stats: '124',
   height: 97,
   series: [{
@@ -190,7 +187,7 @@ const statisticsVerticalC = {
 const statisticsVerticalD = {
   title: 'Total de Aplicantes',
   color: currentTheme.info,
-  icon: 'tabler-credit-card',
+  icon: 'custom-iconaplicantes',
   stats: '10',
   height: 97,
   series: [{
@@ -246,6 +243,11 @@ const statisticsVerticalD = {
     },
   },
 }
+
+
+import { useUserListStore } from '@/views/apps/user/useUserListStore'
+import { avatarText } from '@core/utils/formatters'
+import { VDataTableServer } from 'vuetify/labs/VDataTable'
 
 const userListStore = useUserListStore()
 const searchQuery = ref('')
@@ -395,7 +397,7 @@ const deleteUser = id => {
         v-bind="statisticsVerticalA"
         :chart-options="{
           ...statisticsVerticalA.chartOptions,
-     
+          colors: [currentTheme.primary] // Color de línea para el gráfico
         }"
       />
     </VCol>
@@ -450,184 +452,180 @@ const deleteUser = id => {
         </VCardText>
       </VCard>
     </VCol>
-
-      <VCol
-        cols="12"
-        sm="8"
-      >
-        <VCard title="Ultimas Citas">
-          <!-- SECTION datatable -->
-          <VDataTableServer
-            v-model:items-per-page="options.itemsPerPage"
-            v-model:page="options.page"
-            :items="users"
-            :items-length="totalUsers"
-            :headers="headers"
-            class="text-no-wrap"
-            @update:options="options = $event"
-          >
-            <!-- User -->
-            <template #item.user="{ item }">
-              <div class="d-flex align-center">
-                <VAvatar
-                  size="34"
-                  :variant="!item.raw.avatar ? 'tonal' : undefined"                 
-                  class="me-3"
-                >
-                  <VImg
-                    v-if="item.raw.avatar"
-                    :src="item.raw.avatar"
-                  />
-                  <span v-else>{{ avatarText(item.raw.fullName) }}</span>
-                </VAvatar>
-
-                <div class="d-flex flex-column">
-                  <h6 class="text-base">
-                    <RouterLink
-                      :to="{ name: 'apps-user-view-id', params: { id: item.raw.id } }"
-                      class="font-weight-medium user-list-name"
-                    >
-                      {{ item.raw.fullName }}
-                    </RouterLink>
-                  </h6>                
-                </div>
-              </div>
-            </template>
-
-            <!-- 👉 Role -->
-            <template #item.role="{ item }">
-              <div class="d-flex align-center gap-4">
-                <span class="text-capitalize">{{ item.raw.role }}</span>
-              </div>
-            </template>
-
-            <!-- Plan -->
-            <template #item.plan="{ item }">
-              <span class="text-capitalize font-weight-medium">{{ item.raw.currentPlan }}</span>
-            </template>
-
-            <!-- Status -->
-            <template #item.billing="{ item }">
-              <VChip
-                :color="resolveUserStatusVariant(item.raw.status)"
-                size="small"
-                label
-                class="text-capitalize"
+    
+    <VCol
+      cols="12"
+      sm="8"
+    >
+      <VCard title="Ultimas Citas">
+        <!-- SECTION datatable -->
+        <VDataTableServer
+          v-model:items-per-page="options.itemsPerPage"
+          v-model:page="options.page"
+          :items="users"
+          :items-length="totalUsers"
+          :headers="headers"
+          class="text-no-wrap"
+          @update:options="options = $event"
+        >
+          <!-- User -->
+          <template #item.user="{ item }">
+            <div class="d-flex align-center">
+              <VAvatar
+                size="34"
+                :variant="!item.raw.avatar ? 'tonal' : undefined"
+                :color="!item.raw.avatar ? resolveUserStatusVariantE(item.raw.role).color : undefined"
+                class="me-3"
               >
-                {{ item.raw.billing }}
-              </VChip>
-            </template>
-
-            <!-- Actions -->
-            <template #item.actions="{ item }">
-              <IconBtn @click="deleteUser(item.raw.id)">
-                <VIcon icon="tabler-trash" />
-              </IconBtn>
-
-              <IconBtn>
-                <VIcon icon="tabler-edit" />
-              </IconBtn>
-
-              <VBtn
-                icon
-                variant="text"
-                size="small"
-                color="medium-emphasis"
-              >
-                <VIcon
-                  size="24"
-                  icon="tabler-dots-vertical"
+                <VImg
+                  v-if="item.raw.avatar"
+                  :src="item.raw.avatar"
                 />
+                <span v-else>{{ avatarText(item.raw.fullName) }}</span>
+              </VAvatar>
 
-                <VMenu activator="parent">
-                  <VList>
-                    <VListItem :to="{ name: 'apps-user-view-id', params: { id: item.raw.id } }">
-                      <template #prepend>
-                        <VIcon icon="tabler-eye" />
-                      </template>
-
-                      <VListItemTitle>View</VListItemTitle>
-                    </VListItem>
-
-                    <VListItem link>
-                      <template #prepend>
-                        <VIcon icon="tabler-pencil" />
-                      </template>
-                      <VListItemTitle>Edit</VListItemTitle>
-                    </VListItem>
-
-                    <VListItem @click="deleteUser(item.raw.id)">
-                      <template #prepend>
-                        <VIcon icon="tabler-trash" />
-                      </template>
-                      <VListItemTitle>Delete</VListItemTitle>
-                    </VListItem>
-                  </VList>
-                </VMenu>
-              </VBtn>
-            </template>
-          </VDataTableServer>
-          <!-- SECTION -->
-        </VCard>
-      </VCol>
-      <VCol
-        cols="12"
-        sm="4"
-      >
-        <VCard title="Médicos">
-          <!-- DOCTORES -->
-          <VDataTableServer
-            :items="users"
-            :items-length="null"
-            :headers="headersDocs"
-            :pagination="false"
-            class="text-no-wrap"
-            @update:options="options = $event"
-          >
-            <!-- User -->
-            <template #item.user="{ item }">
-              <div class="d-flex align-center">
-                <VAvatar
-                  size="34"
-                  :variant="!item.raw.avatar ? 'tonal' : undefined"              
-                  class="me-3"
-                >
-                  <VImg
-                    v-if="item.raw.avatar"
-                    :src="item.raw.avatar"
-                  />
-                  <span v-else>{{ avatarText(item.raw.fullName) }}</span>
-                </VAvatar>
-
-                <div class="d-flex flex-column">
-                  <h6 class="text-base">
-                    <RouterLink
-                      :to="{ name: 'apps-user-view-id', params: { id: item.raw.id } }"
-                      class="font-weight-medium user-list-name"
-                    >
-                      {{ item.raw.fullName }}
-                    </RouterLink>
-                  </h6>                 
-                </div>
+              <div class="d-flex flex-column">
+                <h6 class="text-base">
+                  <RouterLink
+                    :to="{ name: 'apps-user-view-id', params: { id: item.raw.id } }"
+                    class="font-weight-medium user-list-name"
+                  >
+                    {{ item.raw.fullName }}
+                  </RouterLink>
+                </h6>              
               </div>
-            </template>
+            </div>
+          </template>
 
-            <!-- Status -->
-            <template #item.status="{ item }">
-              <VChip
-                :color="resolveUserStatusVariant(item.raw.status)"
-                size="small"
-                label
-                class="text-capitalize"
+          <!-- 👉 Role -->
+          <template #item.role="{ item }">
+            <div class="d-flex align-center gap-4">
+              <span class="text-capitalize">{{ item.raw.role }}</span>
+            </div>
+          </template>
+
+          <!-- Plan -->
+          <template #item.plan="{ item }">
+            <span class="text-capitalize font-weight-medium">{{ item.raw.currentPlan }}</span>
+          </template>
+
+          <!-- Status -->
+          <template #item.billing="{ item }">
+            <VChip
+              :color="resolveUserStatusVariant(item.raw.status)"
+              size="small"
+              label
+              class="text-capitalize"
+            >
+              {{ item.raw.billing }}
+            </VChip>
+          </template>
+
+          <!-- Actions -->
+          <template #item.actions="{ item }">
+            <IconBtn @click="deleteUser(item.raw.id)">
+              <VIcon icon="tabler-trash" />
+            </IconBtn>
+
+            <IconBtn>
+              <VIcon icon="tabler-edit" />
+            </IconBtn>
+
+            <VBtn
+              icon
+              variant="text"
+              size="small"
+              color="medium-emphasis"
+            >
+              <VMenu activator="parent">
+                <VList>
+                  <VListItem :to="{ name: 'apps-user-view-id', params: { id: item.raw.id } }">
+                    <template #prepend>
+                      <VIcon icon="tabler-eye" />
+                    </template>
+
+                    <VListItemTitle>View</VListItemTitle>
+                  </VListItem>
+
+                  <VListItem link>
+                    <template #prepend>
+                      <VIcon icon="tabler-pencil" />
+                    </template>
+                    <VListItemTitle>Edit</VListItemTitle>
+                  </VListItem>
+
+                  <VListItem @click="deleteUser(item.raw.id)">
+                    <template #prepend>
+                      <VIcon icon="tabler-trash" />
+                    </template>
+                    <VListItemTitle>Delete</VListItemTitle>
+                  </VListItem>
+                </VList>
+              </VMenu>
+            </VBtn>
+          </template>
+        </VDataTableServer>
+        <!-- SECTION -->
+      </VCard>
+    </VCol>
+    <VCol
+      cols="12"
+      sm="4"
+    >
+      <VCard title="Médicos">
+        <!-- DOCTORES -->
+        <VDataTableServer
+          :items="users"
+          :items-length="null"
+          :headers="headersDocs"
+          :pagination="false"
+          class="text-no-wrap"
+          @update:options="options = $event"
+        >
+          <!-- User -->
+          <template #item.user="{ item }">
+            <div class="d-flex align-center">
+              <VAvatar
+                size="34"
+                :variant="!item.raw.avatar ? 'tonal' : undefined"
+                :color="!item.raw.avatar ? resolveUserRoleVariant(item.raw.role).color : undefined"
+                class="me-3"
               >
-                {{ item.raw.status }}
-              </VChip>
-            </template>            
-          </VDataTableServer>
-        </VCard>
-      </VCol>
-    </VRow>
+                <VImg
+                  v-if="item.raw.avatar"
+                  :src="item.raw.avatar"
+                />
+                <span v-else>{{ avatarText(item.raw.fullName) }}</span>
+              </VAvatar>
 
+              <div class="d-flex flex-column">
+                <h6 class="text-base">
+                  <RouterLink
+                    :to="{ name: 'apps-user-view-id', params: { id: item.raw.id } }"
+                    class="font-weight-medium user-list-name"
+                  >
+                    {{ item.raw.fullName }}
+                  </RouterLink>
+                </h6>
+              </div>
+            </div>
+          </template>
+
+          <!-- Status -->
+          <template #item.status="{ item }">
+            <VChip
+              :color="resolveUserStatusVariant(item.raw.status)"
+              size="small"
+              label
+              class="text-capitalize"
+            >
+              {{ item.raw.status }}
+            </VChip>
+          </template>            
+        </VDataTableServer>
+      </VCard>
+    </VCol>
+  </VRow>
 </template>
 
 <style lang="scss">

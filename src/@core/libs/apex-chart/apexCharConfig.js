@@ -13,9 +13,9 @@ const colorVariables = themeColors => {
 
 export const getScatterChartConfig = themeColors => {
   const scatterColors = {
-    series1: '#ff9f43',
-    series2: '#7367f0',
-    series3: '#28c76f',
+    series1: '#3545b3',
+    series2: '#00ce96',
+    series3: '#ff8c44',
   }
 
   const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
@@ -472,17 +472,17 @@ export const getAreaChartSplineConfig = themeColors => {
 }
 export const getColumnChartConfig = themeColors => {
   const columnColors = {
-    series1: '#826af9',
-    series2: '#d2b0ff',
-    series3: '#ff00ff',
-    bg: '#f8d3ff',
+    series1: '#3545b3',
+    series2: '#00ce96',
+    series3: '#ff8c44',
+    bg: '#fff',
   }
 
   const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
   
   return {
     chart: {
-      offsetX: -10,
+      offsetX: -12,
       stacked: true,
       parentHeightOffset: 0,
       toolbar: { show: false },
@@ -512,16 +512,18 @@ export const getColumnChartConfig = themeColors => {
       bar: {
         columnWidth: '15%',
         colors: {
-          backgroundBarRadius: 10,
+          backgroundBarRadius: 15,
           backgroundBarColors: [columnColors.bg, columnColors.bg, columnColors.bg, columnColors.bg, columnColors.bg],
         },
       },
     },
     grid: {
+      show: false,
       borderColor: themeBorderColor,
       xaxis: {
-        lines: { show: true },
-      },
+        lines: { show: false },
+      },     
+      
     },
     yaxis: {
       labels: {
